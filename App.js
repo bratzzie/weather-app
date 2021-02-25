@@ -1,8 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location'
 import WeatherInfo from './App/components/WeatherInfo';
+import UnitsPicker from './App/components/UnitsPicker';
+import { colors } from './App/styles';
 
 const BASE_WEATHER_URL = 'https://api.openweathermap.ord/data/2.5/weather?'
 
@@ -13,9 +15,11 @@ const [unitsSystem, setUnitSystem] = useState('metric');
 
 useEffect(() => {
   load()
-}, [])
+}, [unitsSystem])
 
-async function load() { 
+async function load() {
+  setCurrentWeather(null);
+  setErrorMessage(null); 
   try {
     let {status} = await Location.requestPermissionsAsync();
 
@@ -51,19 +55,28 @@ async function load() {
     <View style={styles.container}>
       <StatusBar style="auto" />
      <View style={styles.main}>
+       <UnitsPicker unitsSystem = {unitsSystem} setUnitSystem = {setUnitSystem} />
        <WeatherInfo currentWeather={currentWeather} />
      </View>
       
     </View>
   );
  }
- else{
+ else if (errorMessage){
   return (
     <View style={styles.container}>
-      <Text>{errorMessage}</Text>
       <StatusBar style="auto" />
+      <Text>{errorMessage}</Text>
     </View>
   );
+ }
+ else{
+   return(
+    <View style={styles.container}>
+    <StatusBar style="auto" />
+   <ActivityIndicator size="large" color={colors.primary_color}/>
+  </View>
+   );
  }
   
 }
