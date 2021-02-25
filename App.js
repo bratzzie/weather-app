@@ -5,6 +5,7 @@ import * as Location from 'expo-location'
 import WeatherInfo from './App/components/WeatherInfo';
 import UnitsPicker from './App/components/UnitsPicker';
 import { colors } from './App/styles';
+import Reload from './App/components/Reload';
 
 const BASE_WEATHER_URL = 'https://api.openweathermap.ord/data/2.5/weather?'
 
@@ -56,6 +57,7 @@ async function load() {
       <StatusBar style="auto" />
      <View style={styles.main}>
        <UnitsPicker unitsSystem = {unitsSystem} setUnitSystem = {setUnitSystem} />
+       <Reload load={load} />
        <WeatherInfo currentWeather={currentWeather} />
      </View>
       
