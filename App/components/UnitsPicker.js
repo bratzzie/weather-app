@@ -2,10 +2,10 @@ import React from 'react'
 import { StyleSheet, Platform, View } from 'react-native'
 import {Picker} from '@react-native-community/picker'
 
-export default function UnitsPicker({unitsSystem, setUnitsSystem}) {
+export default function UnitsPicker({unitsSystem, setUnitSystem}) {
     return (
         <View style={styles.unitsSystem}>
-            <Picker mode="dropdown" itemStyle={{fontSize: 12}}  selectedValue={unitsSystem} onValueChange={(item) => setUnitsSystem(item)}>
+            <Picker mode="dropdown" itemStyle={{fontSize: 12}}  selectedValue={unitsSystem} onValueChange={(item) => setUnitSystem(item)}>
                 <Picker.Item label = 'C' value = 'metric' />
                 <Picker.Item label = 'F' value = 'imperial' />
             </Picker>

@@ -6,8 +6,10 @@ import WeatherInfo from './App/components/WeatherInfo';
 import UnitsPicker from './App/components/UnitsPicker';
 import { colors } from './App/styles';
 import Reload from './App/components/Reload';
+import WeatherDetails from './App/components/WeatherDetails';
+import{WEATHER_API_KEY} from '@env'
 
-const BASE_WEATHER_URL = 'https://api.openweathermap.ord/data/2.5/weather?'
+const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather?'
 
 export default function App() {
 const [errorMessage, setErrorMessage] = useState(null);
@@ -60,7 +62,7 @@ async function load() {
        <Reload load={load} />
        <WeatherInfo currentWeather={currentWeather} />
      </View>
-      
+      <WeatherDetails currentWeather={currentWeather} unitsSystem={unitsSystem}/>
     </View>
   );
  }
@@ -68,7 +70,8 @@ async function load() {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <Text>{errorMessage}</Text>
+      <Reload load={load} />
+      <Text style={{textAlign: 'center'}}>{errorMessage}</Text>
     </View>
   );
  }
@@ -86,8 +89,10 @@ async function load() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
   },
+  main: {
+    justifyContent: 'center',
+    flex: 1
+  }
 });

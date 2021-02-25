@@ -5,11 +5,11 @@ import {colors} from '../styles'
 
 const {primary_color, secondary_color, border_color} = colors;
 
-const WeatherInfo = ({currenWeather}) => {
+const WeatherInfo = ({currentWeather}) => {
 
 const {main: {temp},
        weather: [details],
-       name} = currenWeather;
+       name,} = currentWeather;
 const {icon, main, description } = details;
 const iconUrl = `https://openweathermap.org/img/wn/${icon}@4x.png`
 
